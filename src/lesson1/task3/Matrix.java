@@ -14,7 +14,7 @@ public class Matrix {
 //    Упорядочить столбцы по убыванию среднего значения.
 
 //    ЗАДАЧА 2. Дана целочисленная прямоугольная матрица.
-//    Упорядочить столбцы по убыванию среднего значения.
+//    Упорядочить строки по самой длинной серии одинаковых элементов.
 
 //    ЗАДАЧА 3. Дана квадратная матрица A порядка M (M — нечетное число). Начи-
 //    ная с элемента A1,1 и перемещаясь по часовой стрелке, вывести все ее эле-
@@ -87,13 +87,13 @@ public class Matrix {
         int columns = matrix[0].length;
         int count = 0;
         for (i = 0; i < rows; i++) {
+            for (k = 0; k < columns - 1; k++) {
+                if(matrix[i][k]==matrix[i][k+1])
+                    count++;
+                if(count>max1)
+                    max1=count;
+            }
             for (j = 0; j < rows; j++) {
-                for (k = 0; k < columns - 1; k++) {
-                    if(matrix[i][k]==matrix[i][k+1])
-                        count++;
-                    if(count>max1)
-                        max1=count;
-                }
                 count=0;
                 for (k = 0; k < columns - 1; k++) {
                     if (matrix[j][k] == matrix[j][k + 1])
@@ -105,9 +105,9 @@ public class Matrix {
                     swapRows(matrix, i, j);
                 }
                 count=0;
-                max1 = 0;
                 max2 = 0;
             }
+            max1 = 0;
         }
         return matrix;
     }
@@ -115,23 +115,23 @@ public class Matrix {
     private static int[][] sortByAverageValue(int[][]matrix){
         int i,j,k;
         int rows = matrix.length;
-        int sum1 = 0;
-        int sum2 = 0;
+        double sum1 = 0;
+        double sum2 = 0;
         int columns = matrix[0].length;
         for(i = 0; i<columns; i++){
-           for(j = 0; j<columns; j++){
-               for(k = 0; k<rows; k++) {
-                   sum1+=matrix[k][i];
-               }
+            for(k = 0; k<rows; k++) {
+                sum1+=matrix[k][i];
+            }
+            for(j = 0; j<columns; j++) {
                for(k = 0; k<rows; k++) {
                    sum2+=matrix[k][j];
                }
-               if(sum2<sum1){
+               if((sum2/matrix.length)<(sum1/matrix.length)){
                    swapColumns(matrix, i, j);
                }
-               sum1 = 0;
                sum2 = 0;
-           }
+            }
+            sum1 = 0;
         }
         return matrix;
     }

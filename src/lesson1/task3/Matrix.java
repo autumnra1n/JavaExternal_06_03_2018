@@ -87,13 +87,13 @@ public class Matrix {
         int columns = matrix[0].length;
         int count = 0;
         for (i = 0; i < rows; i++) {
+            for (k = 0; k < columns - 1; k++) {
+                if(matrix[i][k]==matrix[i][k+1])
+                    count++;
+                if(count>max1)
+                    max1=count;
+            }
             for (j = 0; j < rows; j++) {
-                for (k = 0; k < columns - 1; k++) {
-                    if(matrix[i][k]==matrix[i][k+1])
-                        count++;
-                    if(count>max1)
-                        max1=count;
-                }
                 count=0;
                 for (k = 0; k < columns - 1; k++) {
                     if (matrix[j][k] == matrix[j][k + 1])

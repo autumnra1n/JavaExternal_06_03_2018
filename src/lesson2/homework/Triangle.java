@@ -3,7 +3,7 @@ package lesson2.homework;
 /**
  * Created by Михаил on 14.03.2018.
  */
-public class Triangle implements CommonInterface {
+public class Triangle extends AbstractFigure {
 
     private Point a;
     private Point b;

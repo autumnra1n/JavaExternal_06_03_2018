@@ -1,32 +1,32 @@
-package lesson2.homework;
+package lesson3.Utils;
 
-import java.util.ArrayList;
+import lesson3.model.CVehicle;
+
 import java.util.Arrays;
-import java.util.List;
 
 /**
- * Created by Михаил on 14.03.2018.
+ * Created by Михаил on 15.03.2018.
  */
-public class Polygon {
+public class DynamicVehicleArray {
 
     private final static double DEFAULT_LOADFACTOR = 0.75;
     private final static int DEFAULT_ADDITIONALSPACE = 10;
     private final static int DEFAULT_INITSPACE = 15;
     private double loadFactor;
     private int additionalSpace;
-    private AbstractFigure[] dynamicArray;
+    private CVehicle[] dynamicArray;
 
-    public Polygon(int capacity, int additionalSpace, int loadFactor) {
+    public DynamicVehicleArray(int capacity, int additionalSpace, int loadFactor) {
         checkInputs(capacity, additionalSpace, loadFactor);
     }
 
-    public Polygon(){
-        this.dynamicArray = new AbstractFigure[DEFAULT_INITSPACE];
+    public DynamicVehicleArray(){
+        this.dynamicArray = new CVehicle[DEFAULT_INITSPACE];
         this.loadFactor = DEFAULT_LOADFACTOR;
         this.additionalSpace = DEFAULT_ADDITIONALSPACE;
     }
 
-    public void add(AbstractFigure... vehicles){
+    public void add(CVehicle... vehicles){
         int count = 0;
         for(int i = 0; i<dynamicArray.length; i++){
             if(dynamicArray[i]!=null){
@@ -38,7 +38,7 @@ public class Polygon {
         if(vehicles.length>(dynamicArray.length-count)*this.loadFactor){
             if(dynamicArray[0]==null){
                 while(vehicles.length>(dynamicArray.length-count)*this.loadFactor){
-                    dynamicArray = new AbstractFigure[dynamicArray.length+this.additionalSpace];
+                    dynamicArray = new CVehicle[dynamicArray.length+this.additionalSpace];
                 }
                 this.arrayCopy(dynamicArray, vehicles, 0);
             }
@@ -61,7 +61,7 @@ public class Polygon {
             System.out.println("Wrong remove index");
         }
         else
-        {
+            {
             int count = 0;
             for (int i = 0; i < dynamicArray.length; i++) {
                 if (dynamicArray[i] != null) {
@@ -69,9 +69,9 @@ public class Polygon {
                 } else
                     break;
             }
-            AbstractFigure[] tempArray = new AbstractFigure[DEFAULT_INITSPACE];
+            CVehicle[] tempArray = new CVehicle[DEFAULT_INITSPACE];
             if (dynamicArray.length > DEFAULT_INITSPACE) {
-                tempArray = new AbstractFigure[dynamicArray.length - 1];
+                tempArray = new CVehicle[dynamicArray.length - 1];
             }
             for (int i = 0; i < index; i++) {
                 tempArray[i] = dynamicArray[i];
@@ -85,15 +85,15 @@ public class Polygon {
         }
     }
 
-    private void arrayCopy(AbstractFigure[] dynamicArray, AbstractFigure[] vehicles, int count){
+    private void arrayCopy(CVehicle[] dynamicArray, CVehicle[] vehicles, int count){
         for(int i = 0; i<vehicles.length;i++){
             dynamicArray[count]=vehicles[i];
             count++;
         }
     }
 
-    private AbstractFigure[] newArrayInstance(AbstractFigure[] dynamicArray, AbstractFigure[] vehicles, int count){
-        AbstractFigure[] tempArray = new AbstractFigure[dynamicArray.length+this.additionalSpace];
+    private CVehicle[] newArrayInstance(CVehicle[] dynamicArray, CVehicle[] vehicles, int count){
+        CVehicle[] tempArray = new CVehicle[dynamicArray.length+this.additionalSpace];
         this.arrayCopy(tempArray, dynamicArray, 0);
         System.out.println(tempArray.length+" "+dynamicArray.length);
         if(tempArray.length<dynamicArray.length) {
@@ -107,9 +107,9 @@ public class Polygon {
 
     private void checkInputs(int capacity, int additionalSpace, int loadFactor){
         if(capacity>0&&capacity<10000)
-            this.dynamicArray = new AbstractFigure[capacity];
+            this.dynamicArray = new CVehicle[capacity];
         else
-            this.dynamicArray = new AbstractFigure[DEFAULT_INITSPACE];
+            this.dynamicArray = new CVehicle[DEFAULT_INITSPACE];
         if(additionalSpace>0&&additionalSpace<1000)
             this.additionalSpace = additionalSpace;
         else
@@ -120,12 +120,12 @@ public class Polygon {
             this.loadFactor = DEFAULT_LOADFACTOR;
     }
 
-    private AbstractFigure[] trimmedArray(){
+    private CVehicle[] trimmedArray(){
         int count = 0;
         while (dynamicArray[count]!=null){
             count++;
         }
-        AbstractFigure[] tempArray = new AbstractFigure[count];
+        CVehicle[] tempArray = new CVehicle[count];
         for (int i=0;i<count;i++){
             tempArray[i]=dynamicArray[i];
         }
@@ -148,11 +148,11 @@ public class Polygon {
         this.additionalSpace = additionalSpace;
     }
 
-    public AbstractFigure[] getDynamicArray() {
+    public CVehicle[] getDynamicArray() {
         return trimmedArray();
     }
 
-    public void setDynamicArray(AbstractFigure[] dynamicArray) {
+    public void setDynamicArray(CVehicle[] dynamicArray) {
         this.dynamicArray = dynamicArray;
     }
 

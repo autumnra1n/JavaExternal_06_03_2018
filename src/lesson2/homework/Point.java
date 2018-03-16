@@ -3,7 +3,7 @@ package lesson2.homework;
 /**
  * Created by Михаил on 14.03.2018.
  */
-public class Point implements CommonInterface {
+public class Point extends AbstractFigure {
 
     private int x;
     private int y;

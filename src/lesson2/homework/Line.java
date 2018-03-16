@@ -3,7 +3,7 @@ package lesson2.homework;
 /**
  * Created by Михаил on 14.03.2018.
  */
-public class Line implements CommonInterface {
+public class Line extends AbstractFigure {
 
     private Point start;
     private Point end;

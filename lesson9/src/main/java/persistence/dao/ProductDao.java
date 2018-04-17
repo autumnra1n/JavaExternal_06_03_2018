@@ -1,5 +1,7 @@
 package persistence.dao;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import persistence.model.Category;
 import persistence.model.Product;
 
@@ -11,50 +13,67 @@ import java.util.Map;
 
 public class ProductDao {
 
-    private Connection con = null;
-    private Statement stmt = null;
-
-    public ProductDao() throws Exception{
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
-        String url = "jdbc:mysql://localhost:3306/products";
-        con = DriverManager.getConnection(url,"root","c1a2t3r4u5n6");
-    }
-
-    // Завершение работы
-    public void stop() throws SQLException
-    {
-        con.close();
-    }
+    private static final Logger log = LogManager.getLogger(ProductDao.class);
+    private Savepoint savepoint1;
 
     // Добавление страны
-    public boolean addProduct(String name, int price, int weight, int id)
-    {
+    public boolean addProduct(String name, int price, int weight, int id){
         String sql = "INSERT INTO product (name, price, weight, id) VALUES ('"+name+"', '"+price+"', '"+weight+"', '"+id+"')";
-        try
-        {
-            con.createStatement().executeUpdate(sql);
+        Connection con = null;
+        try {
+            con = ConnectionPool.getConnection();
+            savepoint1 = con.setSavepoint("Savepoint1");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try{
+            con.setAutoCommit(false);
+            int c = con.createStatement().executeUpdate(sql);
             System.out.println("Продукт "+name+
                     " успешно добавлен!");
+            log.info("Result Set of adding "+ c);
+            con.commit();
             return true;
-        } catch (SQLException e)
+        }
+        catch (SQLException e)
         {
+            try {
+                con.rollback(savepoint1);
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
             System.out.println("ОШИБКА! Категория "+name+
                     " не добавлена!");
+            log.error("Error", e);
             System.out.println(" >> "+e.getMessage());
             return false;
+        }
+        finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
     // Удаление страны
     public boolean deleteProduct(int id) throws SQLException
     {
         String sql = "DELETE FROM product WHERE product_id = "+id;
+        Connection con = null;
+        try {
+            con = ConnectionPool.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try
         {
-            int c = stmt.executeUpdate(sql);
+            int c = con.createStatement().executeUpdate(sql);
             if (c>0)
             {
                 System.out.println("Продукт с идентификатором "
                         + id +" успешно удален!");
+                log.info("Result Set of delete"+ c);
                 return true;
             }
             else
@@ -65,10 +84,14 @@ public class ProductDao {
             }
         } catch (SQLException e)
         {
+            log.error("Error", e);
             System.out.println(
                     "ОШИБКА при удалении продукта с идентификатором "+id);
             System.out.println(" >> "+e.getMessage());
             return false;
+        }
+        finally {
+            con.close();
         }
     }
 
@@ -76,6 +99,12 @@ public class ProductDao {
     {
         String sql = "SELECT * FROM product";
         List<Product> list = new ArrayList<Product>();
+        Connection con = null;
+        try {
+            con = ConnectionPool.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try
         {
             ResultSet rs = con.createStatement().executeQuery(sql);
@@ -92,17 +121,31 @@ public class ProductDao {
             rs.close();
         } catch (SQLException e)
         {
+            log.error("Error", e.getCause());
             System.out.println(
                     "ОШИБКА при получении списка продуктов");
             System.out.println(" >> "+e.getMessage());
         }
+        finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                log.error("Error", e);
+                e.printStackTrace();
+            }
+        }
         return list;
     }
 
-    public Map showProductsWithCategory()
-    {
+    public Map showProductsWithCategory() throws SQLException {
         String sql = "SELECT * FROM product p JOIN category c ON  p.id = c.id";
         Map <Category,Product> map = new HashMap<Category, Product>();
+        Connection con = null;
+        try {
+            con = ConnectionPool.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try
         {
             ResultSet rs = con.createStatement().executeQuery(sql);
@@ -121,9 +164,13 @@ public class ProductDao {
             rs.close();
         } catch (SQLException e)
         {
+            log.error("Error", e);
             System.out.println(
                     "ОШИБКА при получении списка продуктов");
             System.out.println(" >> "+e.getMessage());
+        }
+        finally {
+            con.close();
         }
         return map;
     }
@@ -132,6 +179,12 @@ public class ProductDao {
     {
         String sql = "SELECT * FROM product p JOIN category c ON  p.id = c.id WHERE c.name = '"+name+"'";
         Map <Category,Product> map = new HashMap<Category, Product>();
+        Connection con = null;
+        try {
+            con = ConnectionPool.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try
         {
             ResultSet rs = con.createStatement().executeQuery(sql);
@@ -150,9 +203,18 @@ public class ProductDao {
             rs.close();
         } catch (SQLException e)
         {
+            log.error("Error", e);
             System.out.println(
                     "ОШИБКА при получении списка продуктов");
             System.out.println(" >> "+e.getMessage());
+        }
+        finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                log.error("Error", e.getCause());
+                e.printStackTrace();
+            }
         }
         return map;
     }

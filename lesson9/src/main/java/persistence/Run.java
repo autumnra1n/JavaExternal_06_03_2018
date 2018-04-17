@@ -17,7 +17,6 @@ public class Run {
             System.out.println(productDao.showProducts());
             System.out.println(productDao.showProductsWithCategory());
             System.out.println(productDao.showProductsWithCategoryByCategoryName("Meat"));
-            productDao.stop();
         } catch (Exception e){
             e.printStackTrace();
         }

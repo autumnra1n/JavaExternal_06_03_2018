@@ -1,0 +1,96 @@
+2018-04-17 11:50:25.680 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:50:25.696 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:50:25.712 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:50:25.724 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:52:04.251 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:52:04.264 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:52:04.273 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:52:04.284 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:52:47.079 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:52:47.092 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:52:47.102 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:52:47.112 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:54:12.111 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:54:12.125 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:54:12.141 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:54:12.152 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:54:40.045 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:54:40.057 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:54:40.071 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:54:40.081 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:57:28.062 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:57:28.084 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:57:28.095 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 11:57:28.105 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 12:00:53.981 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 12:00:53.998 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 12:00:54.010 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 12:00:54.020 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 12:25:40.324 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 12:25:40.342 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 12:25:40.353 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+2018-04-17 12:25:40.367 INFO [main] [persistence.dao.ProductDao] [addProduct] [persistence.dao.ProductDao.addProduct(ProductDao.java:31)] - Result Set of adding
+"12:29:51.491 [main] INFO  persistence.dao.ProductDao - Result Set of adding
+""12:29:51.512 [main] INFO  persistence.dao.ProductDao - Result Set of adding
+""12:29:51.527 [main] INFO  persistence.dao.ProductDao - Result Set of adding
+""12:29:51.547 [main] INFO  persistence.dao.ProductDao - Result Set of adding
+"12:30:08.508 [main] INFO  persistence.dao.ProductDao - Result Set of adding
+12:30:08.520 [main] INFO  persistence.dao.ProductDao - Result Set of adding
+12:30:08.536 [main] INFO  persistence.dao.ProductDao - Result Set of adding
+12:30:08.549 [main] INFO  persistence.dao.ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:32:47 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:32:47 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:32:47 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:32:47 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:33:55 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:33:55 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:33:55 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:33:55 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:34:56 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:34:56 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:34:56 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:34:56 ProductDao - Result Set of adding
+[DEBUG] 2018-04-17 12:39:30 ProductDao - Result Set of adding
+[DEBUG] 2018-04-17 12:39:30 ProductDao - Result Set of adding
+[DEBUG] 2018-04-17 12:39:30 ProductDao - Result Set of adding
+[DEBUG] 2018-04-17 12:39:30 ProductDao - Result Set of adding
+[ERROR] 2018-04-17 12:39:52 ProductDao - Result Set of adding
+[ERROR] 2018-04-17 12:39:52 ProductDao - Result Set of adding
+[ERROR] 2018-04-17 12:39:52 ProductDao - Result Set of adding
+[ERROR] 2018-04-17 12:39:52 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:40:32 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:40:32 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:40:32 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:40:32 ProductDao - Result Set of adding
+[INFO ] 2018-04-17 12:42:52 ProductDao - Beef
+[INFO ] 2018-04-17 12:42:52 ProductDao - Sausage
+[INFO ] 2018-04-17 12:42:52 ProductDao - Bonaqua
+[INFO ] 2018-04-17 12:42:52 ProductDao - Cola
+[INFO ] 2018-04-17 12:43:12 ProductDao - Result Set of adding Beef
+[INFO ] 2018-04-17 12:43:12 ProductDao - Result Set of adding Sausage
+[INFO ] 2018-04-17 12:43:12 ProductDao - Result Set of adding Bonaqua
+[INFO ] 2018-04-17 12:43:12 ProductDao - Result Set of adding Cola
+[INFO ] 2018-04-17 12:43:23 ProductDao - Result Set of adding 1
+[INFO ] 2018-04-17 12:43:23 ProductDao - Result Set of adding 1
+[INFO ] 2018-04-17 12:43:23 ProductDao - Result Set of adding 1
+[INFO ] 2018-04-17 12:43:23 ProductDao - Result Set of adding 1
+[INFO ] 2018-04-17 12:44:37 ProductDao - Result Set of adding 1
+[INFO ] 2018-04-17 12:44:37 ProductDao - Result Set of adding 1
+[INFO ] 2018-04-17 12:44:37 ProductDao - Result Set of adding 1
+[INFO ] 2018-04-17 12:44:37 ProductDao - Result Set of adding 1
+[INFO ] 2018-04-17 12:44:55 ProductDao - Result Set of adding 2
+[INFO ] 2018-04-17 12:44:55 ProductDao - Result Set of adding 2
+[INFO ] 2018-04-17 12:44:55 ProductDao - Result Set of adding 2
+[INFO ] 2018-04-17 12:44:55 ProductDao - Result Set of adding 2
+[INFO ] 2018-04-17 12:45:49 ProductDao - Result Set of adding 2
+[INFO ] 2018-04-17 12:45:49 ProductDao - Result Set of adding 2
+[INFO ] 2018-04-17 12:45:49 ProductDao - Result Set of adding 2
+[INFO ] 2018-04-17 12:45:49 ProductDao - Result Set of adding 2
+[INFO ] 2018-04-17 12:47:30 ProductDao - Result Set of adding 2
+[INFO ] 2018-04-17 12:47:30 ProductDao - Result Set of adding 2
+[INFO ] 2018-04-17 12:47:30 ProductDao - Result Set of adding 2
+[INFO ] 2018-04-17 12:47:30 ProductDao - Result Set of adding 2
+[INFO ] 2018-04-17 12:49:07 ProductDao - Result Set of adding 1
+[INFO ] 2018-04-17 12:49:07 ProductDao - Result Set of adding 1
+[INFO ] 2018-04-17 12:49:07 ProductDao - Result Set of adding 1
+[INFO ] 2018-04-17 12:49:07 ProductDao - Result Set of adding 1

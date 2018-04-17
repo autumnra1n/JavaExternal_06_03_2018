@@ -1,26 +1,19 @@
 package persistence.dao;
 import java.sql.*;
 import com.mysql.jdbc.Driver;
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
 public class CategoryDao {
-    private Connection con = null;
-    private Statement stmt = null;
-
-    public CategoryDao() throws Exception{
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
-        String url = "jdbc:mysql://localhost:3306/products";
-        con = DriverManager.getConnection(url,"root","c1a2t3r4u5n6");
-    }
-
-    // Завершение работы
-    public void stop() throws SQLException
-    {
-        con.close();
-    }
-
     // Добавление страны
     public boolean addCategory(String name)
     {
         String sql = "INSERT INTO category (name) VALUES ('"+name+"')";
+        Connection con = null;
+        try {
+            con = ConnectionPool.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try
         {
             con.createStatement().executeUpdate(sql);
@@ -34,11 +27,24 @@ public class CategoryDao {
             System.out.println(" >> "+e.getMessage());
             return false;
         }
+        finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
     // Удаление страны
     public boolean deleteCategory(int id) throws SQLException
     {
         String sql = "DELETE FROM category WHERE id = "+id;
+        Connection con = null;
+        try {
+            con = ConnectionPool.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try
         {
             int c = con.createStatement().executeUpdate(sql);
@@ -61,11 +67,20 @@ public class CategoryDao {
             System.out.println(" >> "+e.getMessage());
             return false;
         }
+        finally {
+            con.close();
+        }
     }
 
     public void showCategories()
     {
         String sql = "SELECT * FROM category";
+        Connection con = null;
+        try {
+            con = ConnectionPool.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try
         {
             ResultSet rs = con.createStatement().executeQuery(sql);
@@ -82,6 +97,13 @@ public class CategoryDao {
             System.out.println(
                     "ОШИБКА при получении списка категорий");
             System.out.println(" >> "+e.getMessage());
+        }
+        finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

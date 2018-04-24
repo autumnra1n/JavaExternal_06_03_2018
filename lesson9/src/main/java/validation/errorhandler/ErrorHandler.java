@@ -8,7 +8,6 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.io.IOException;
 
 public class ErrorHandler extends DefaultHandler {
-    // создание регистратора ошибок для пакета by.bsu.valid
     private Logger logger = LogManager.getLogger();
     public void warning(SAXParseException e) {
         logger.warn(getLineAddress(e) + "-" + e.getMessage());

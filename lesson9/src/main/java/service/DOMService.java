@@ -15,7 +15,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class DOMService {
+public class DOMService implements Service {
 
     public void createProductDocument(int id, String name, int price, int weight, String file) {
         DocumentBuilderFactory documentBuilderFactory =

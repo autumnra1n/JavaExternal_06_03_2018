@@ -4,6 +4,8 @@ import persistence.dao.CategoryDao;
 import persistence.dao.ProductDao;
 import service.DOMService;
 import service.SAXService;
+import service.Service;
+import service.ServiceFactory;
 import validation.validator.ValidatorSAXXSD;
 
 import javax.xml.validation.Validator;
@@ -25,9 +27,11 @@ public class Run {
         } catch (Exception e){
             e.printStackTrace();
         }
-        DOMService domService = new DOMService();
+        ServiceFactory serviceFactory = new ServiceFactory();
+        DOMService domService = (DOMService) serviceFactory.getService(0);
         domService.createCategoryDocument(1,"daads","C:\\Users\\Michael\\MavensProjectsCources\\lesson9\\src\\main\\resources\\xml\\category.xml");
         ValidatorSAXXSD.validate("C:\\Users\\Michael\\MavensProjectsCources\\lesson9\\src\\main\\resources\\xml\\category.xml","C:\\Users\\Michael\\MavensProjectsCources\\lesson9\\src\\main\\resources\\xml\\category.xsd");
-        SAXService.parseDocument("C:\\Users\\Michael\\MavensProjectsCources\\lesson9\\src\\main\\resources\\xml\\category.xml");
+        SAXService saxService = (SAXService) serviceFactory.getService(1);
+        saxService.parseDocument("C:\\Users\\Michael\\MavensProjectsCources\\lesson9\\src\\main\\resources\\xml\\category.xml");
     }
 }

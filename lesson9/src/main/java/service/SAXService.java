@@ -9,9 +9,9 @@ import validation.errorhandler.ErrorHandler;
 
 import java.io.IOException;
 
-public class SAXService {
+public class SAXService implements Service {
 
-    public static class SimpleHandler extends DefaultHandler{
+    public class SimpleHandler extends DefaultHandler{
         public void startDocument() {
             System.out.println("Parsing started");
         }
@@ -35,15 +35,12 @@ public class SAXService {
         public void endDocument() {
             System.out.println("\nParsing ended");
         }
-        public static SimpleHandler getInstance(){
-            return new SimpleHandler();
-        }
     }
 
-    public static void parseDocument(String path){
+    public void parseDocument(String path){
         try {
             XMLReader reader = XMLReaderFactory.createXMLReader();
-            SimpleHandler handler = SimpleHandler.getInstance();
+            SimpleHandler handler = new SimpleHandler();
             reader.setContentHandler(handler);
             reader.parse(path);
         } catch (SAXException e) {

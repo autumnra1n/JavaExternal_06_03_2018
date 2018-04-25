@@ -11,7 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class StAXService implements Service {
+public class StAXService implements XMLService {
     private XMLInputFactory inputFactory;
     public StAXService() {
         inputFactory = XMLInputFactory.newInstance();
@@ -24,7 +24,6 @@ public class StAXService implements Service {
         try {
             inputStream = new FileInputStream(new File(fileName));
             reader = inputFactory.createXMLStreamReader(inputStream);
-// StAX parsing
             while (reader.hasNext()) {
                 int type = reader.next();
                 if (type == XMLStreamConstants.START_ELEMENT) {

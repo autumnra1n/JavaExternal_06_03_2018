@@ -1,37 +1,27 @@
-package persistence;
-
 import persistence.dao.CategoryDao;
 import persistence.dao.ProductDao;
-import service.DOMService;
-import service.SAXService;
-import service.Service;
-import service.ServiceFactory;
+import persistence.model.Category;
+import service.*;
 import validation.validator.ValidatorSAXXSD;
-
-import javax.xml.validation.Validator;
 
 public class Run {
     public static void main(String[] args) {
-        try {
-            CategoryDao categoryDao = new CategoryDao();
-            ProductDao productDao = new ProductDao();
-            categoryDao.addCategory("Meat");
-            categoryDao.addCategory("Water");
-            productDao.addProduct("Beef",15,16, 1);
-            productDao.addProduct("Sausage", 7, 9, 1);
-            productDao.addProduct("Bonaqua", 5, 5,2);
-            productDao.addProduct("Cola", 7,5,2);
-            System.out.println(productDao.showProducts());
-            System.out.println(productDao.showProductsWithCategory());
-            System.out.println(productDao.showProductsWithCategoryByCategoryName("Meat"));
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        ServiceFactory serviceFactory = new ServiceFactory();
-        DOMService domService = (DOMService) serviceFactory.getService(0);
+        CategoryService categoryService = new CategoryService();
+        ProductService productService = new ProductService();
+        XMLServiceFactory XMLServiceFactory = new XMLServiceFactory();
+        DOMService domService = (DOMService) XMLServiceFactory.getService(0);
+        SAXService saxService = (SAXService) XMLServiceFactory.getService(1);
+        categoryService.addCategory("Meat");
+        categoryService.addCategory("Water");
+        productService.addProduct("Beef",15,16,1);
+        productService.addProduct("Sausage", 7, 9,1);
+        productService.addProduct("Bonaqua", 5, 5,2);
+        productService.addProduct("Cola", 7,5,2);
+        System.out.println(productService.showProducts());
+        System.out.println(productService.showProductsWithCategory());
+        System.out.println(productService.showProductsWithCategoryByCategoryName("Meat"));
         domService.createCategoryDocument(1,"daads","C:\\Users\\Michael\\MavensProjectsCources\\lesson9\\src\\main\\resources\\xml\\category.xml");
         ValidatorSAXXSD.validate("C:\\Users\\Michael\\MavensProjectsCources\\lesson9\\src\\main\\resources\\xml\\category.xml","C:\\Users\\Michael\\MavensProjectsCources\\lesson9\\src\\main\\resources\\xml\\category.xsd");
-        SAXService saxService = (SAXService) serviceFactory.getService(1);
         saxService.parseDocument("C:\\Users\\Michael\\MavensProjectsCources\\lesson9\\src\\main\\resources\\xml\\category.xml");
     }
 }

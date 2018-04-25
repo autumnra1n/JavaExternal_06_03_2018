@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import persistence.model.Category;
 import persistence.model.Product;
+import utils.QueryManager;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,104 +15,60 @@ import java.util.Map;
 public class ProductDao {
 
     private static final Logger log = LogManager.getLogger(ProductDao.class);
-    private Savepoint savepoint1;
+    private static final String ADD_PRODUCT = QueryManager.getProperty("productInsert");
+    private static final String DELETE_PRODUCT = QueryManager.getProperty("productDeleteById");
+    private static final String SHOW_PRODUCTS = QueryManager.getProperty("productSelectAll");
+    private static final String SHOW_PRODUCTS_WITH_CATEGORY = QueryManager.getProperty("productShowAllWithCategory");
+    private static final String SHOW_PRODUCTS_WITH_CATEGORY_BY_CATEGORY_NAME = QueryManager.getProperty("showProductsWithCategoryByCategoryName");
+    private Savepoint savepoint;
 
-    // Добавление страны
-    public boolean addProduct(String name, int price, int weight, int id){
-        String sql = "INSERT INTO product (name, price, weight, id) VALUES ('"+name+"', '"+price+"', '"+weight+"', '"+id+"')";
-        Connection con = null;
-        try {
-            con = ConnectionPool.getConnection();
-            savepoint1 = con.setSavepoint("Savepoint1");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try{
+    public boolean addProduct(String name, int price, int weight, int id) {
+        try (Connection con = ConnectionPool.getConnection()) {
             con.setAutoCommit(false);
-            int c = con.createStatement().executeUpdate(sql);
-            System.out.println("Продукт "+name+
-                    " успешно добавлен!");
-            log.info("Result Set of adding "+ c);
-            con.commit();
-            return true;
-        }
-        catch (SQLException e)
-        {
-            try {
-                con.rollback(savepoint1);
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-            System.out.println("ОШИБКА! Категория "+name+
-                    " не добавлена!");
-            log.error("Error", e);
-            System.out.println(" >> "+e.getMessage());
-            return false;
-        }
-        finally {
-            try {
-                con.close();
+            savepoint = con.setSavepoint("Save");
+            try (PreparedStatement preparedStatement = con.prepareStatement(ADD_PRODUCT)) {
+                preparedStatement.setString(1,name);
+                preparedStatement.setInt(2,price);
+                preparedStatement.setInt(3,weight);
+                preparedStatement.setInt(4,id);
+                preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    // Удаление страны
-    public boolean deleteProduct(int id) throws SQLException
-    {
-        String sql = "DELETE FROM product WHERE product_id = "+id;
-        Connection con = null;
-        try {
-            con = ConnectionPool.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try
-        {
-            int c = con.createStatement().executeUpdate(sql);
-            if (c>0)
-            {
-                System.out.println("Продукт с идентификатором "
-                        + id +" успешно удален!");
-                log.info("Result Set of delete"+ c);
-                return true;
-            }
-            else
-            {
-                System.out.println("Продукт с идентификатором "
-                        + id +" не найден!");
+                con.rollback(savepoint);
+                System.out.println("ОШИБКА! Категория " + name +
+                        " не добавлена!");
+                log.error("Error", e);
+                System.out.println(" >> " + e.getMessage());
                 return false;
             }
-        } catch (SQLException e)
-        {
+            con.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+    public boolean deleteProduct(int id){
+        try (Connection con = ConnectionPool.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(DELETE_PRODUCT)) {
+                preparedStatement.setInt(1,id);
+               return true;
+        } catch (SQLException e)        {
             log.error("Error", e);
             System.out.println(
                     "ОШИБКА при удалении продукта с идентификатором "+id);
             System.out.println(" >> "+e.getMessage());
             return false;
         }
-        finally {
-            con.close();
-        }
     }
 
-    public List showProducts()
-    {
-        String sql = "SELECT * FROM product";
-        List<Product> list = new ArrayList<Product>();
-        Connection con = null;
-        try {
-            con = ConnectionPool.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try
-        {
-            ResultSet rs = con.createStatement().executeQuery(sql);
+    public List showProducts(){
+        List <Product> list = new ArrayList<>();
+        try (Connection con = ConnectionPool.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(SHOW_PRODUCTS)) {
+            ResultSet rs = preparedStatement.executeQuery();
             System.out.println("СПИСОК Продуктов:");
             while (rs.next())
             {
-                int id = rs.getInt("product_id");
+                int id = rs.getInt("category_id");
                 String name = rs.getString("name");
                 int price = rs.getInt("price");
                 int weight = rs.getInt("weight");
@@ -126,37 +83,22 @@ public class ProductDao {
                     "ОШИБКА при получении списка продуктов");
             System.out.println(" >> "+e.getMessage());
         }
-        finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                log.error("Error", e);
-                e.printStackTrace();
-            }
-        }
         return list;
     }
 
-    public Map showProductsWithCategory() throws SQLException {
-        String sql = "SELECT * FROM product p JOIN category c ON  p.id = c.id";
+    public Map showProductsWithCategory(){
         Map <Category,Product> map = new HashMap<Category, Product>();
-        Connection con = null;
-        try {
-            con = ConnectionPool.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try
-        {
-            ResultSet rs = con.createStatement().executeQuery(sql);
+        try (Connection con = ConnectionPool.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(SHOW_PRODUCTS_WITH_CATEGORY)) {
+            ResultSet rs = preparedStatement.executeQuery();
             System.out.println("СПИСОК Продуктов и их категорий:");
             while (rs.next())
             {
-                int id = rs.getInt("product_id");
+                int id = rs.getInt("id");
                 String name = rs.getString("name");
                 int price = rs.getInt("price");
                 int weight = rs.getInt("weight");
-                int categoryId = rs.getInt("id");
+                int categoryId = rs.getInt("category_id");
                 String categoryName = rs.getString("c.name");
                 map.put(new Category(categoryId, categoryName), new Product(id,name,price,weight));
                 System.out.println(" >> "+ id + " - " + name +" "+weight+ " "+price +" "+categoryId +" "+categoryName);
@@ -169,31 +111,21 @@ public class ProductDao {
                     "ОШИБКА при получении списка продуктов");
             System.out.println(" >> "+e.getMessage());
         }
-        finally {
-            con.close();
-        }
         return map;
     }
 
-    public Map showProductsWithCategoryByCategoryName(String name)
-    {
-        String sql = "SELECT * FROM product p JOIN category c ON  p.id = c.id WHERE c.name = '"+name+"'";
+    public Map showProductsWithCategoryByCategoryName(String name) {
         Map <Category,Product> map = new HashMap<Category, Product>();
-        Connection con = null;
-        try {
-            con = ConnectionPool.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try
-        {
-            ResultSet rs = con.createStatement().executeQuery(sql);
+        try (Connection con = ConnectionPool.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(SHOW_PRODUCTS_WITH_CATEGORY_BY_CATEGORY_NAME)) {
+            preparedStatement.setString(1,name);
+            ResultSet rs = preparedStatement.executeQuery();
             System.out.println("СПИСОК Продуктов категории:");
             while (rs.next())
             {
                 int categoryId = rs.getInt("id");
                 String categoryName = rs.getString("c.name");
-                int id = rs.getInt("product_id");
+                int id = rs.getInt("category_id");
                 String productName = rs.getString("name");
                 int price = rs.getInt("price");
                 int weight = rs.getInt("weight");
@@ -207,14 +139,6 @@ public class ProductDao {
             System.out.println(
                     "ОШИБКА при получении списка продуктов");
             System.out.println(" >> "+e.getMessage());
-        }
-        finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                log.error("Error", e.getCause());
-                e.printStackTrace();
-            }
         }
         return map;
     }

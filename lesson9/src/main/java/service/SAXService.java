@@ -9,7 +9,7 @@ import validation.errorhandler.ErrorHandler;
 
 import java.io.IOException;
 
-public class SAXService implements Service {
+public class SAXService implements XMLService {
 
     public class SimpleHandler extends DefaultHandler{
         public void startDocument() {

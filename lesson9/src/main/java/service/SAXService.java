@@ -5,11 +5,10 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.XMLReaderFactory;
-import validation.errorhandler.ErrorHandler;
 
 import java.io.IOException;
 
-public class SAXService implements XMLService {
+public class SAXService {
 
     public class SimpleHandler extends DefaultHandler{
         public void startDocument() {

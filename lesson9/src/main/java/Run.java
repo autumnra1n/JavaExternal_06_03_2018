@@ -8,9 +8,8 @@ public class Run {
     public static void main(String[] args) {
         CategoryService categoryService = new CategoryService();
         ProductService productService = new ProductService();
-        XMLServiceFactory XMLServiceFactory = new XMLServiceFactory();
-        DOMService domService = (DOMService) XMLServiceFactory.getService(0);
-        SAXService saxService = (SAXService) XMLServiceFactory.getService(1);
+        DOMService domService = new DOMService();
+        SAXService saxService = new SAXService();
         categoryService.addCategory("Meat");
         categoryService.addCategory("Water");
         productService.addProduct("Beef",15,16,1);

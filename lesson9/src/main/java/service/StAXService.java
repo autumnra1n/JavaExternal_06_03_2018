@@ -11,7 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class StAXService implements XMLService {
+public class StAXService {
     private XMLInputFactory inputFactory;
     public StAXService() {
         inputFactory = XMLInputFactory.newInstance();
